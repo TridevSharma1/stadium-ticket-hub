@@ -8,18 +8,18 @@ import type { Sport } from "@/lib/types";
 
 // Filter/sort state lives in the URL so navbar search and category links work.
 type MatchesSearch = {
-  q?: string;
-  sport?: Sport | "All";
-  date?: "All" | "This Week" | "This Month";
-  sort?: "date" | "price-asc" | "price-desc" | "newest";
+  q?: string | undefined;
+  sport?: (Sport | "All") | undefined;
+  date?: ("All" | "This Week" | "This Month") | undefined;
+  sort?: ("date" | "price-asc" | "price-desc" | "newest") | undefined;
 };
 
 export const Route = createFileRoute("/_site/matches/")({
   validateSearch: (search: Record<string, unknown>): MatchesSearch => ({
-    q: typeof search.q === "string" ? search.q : undefined,
-    sport: (search.sport as MatchesSearch["sport"]) ?? "All",
-    date: (search.date as MatchesSearch["date"]) ?? "All",
-    sort: (search.sort as MatchesSearch["sort"]) ?? "date",
+    q: typeof search["q"] === "string" ? search["q"] : undefined,
+    sport: (search["sport"] as MatchesSearch["sport"]) ?? "All",
+    date: (search["date"] as MatchesSearch["date"]) ?? "All",
+    sort: (search["sort"] as MatchesSearch["sort"]) ?? "date",
   }),
   component: MatchesPage,
   head: () => ({

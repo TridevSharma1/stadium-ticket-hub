@@ -1,3 +1,4 @@
+import type { ComponentType } from "react";
 import { Card } from "@/components/ui";
 
 /** Known venue photos admins can pick from; custom URLs also supported. */

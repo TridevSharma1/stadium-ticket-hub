@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { CheckCircle2, Clock, Mail, MapPin, Phone, Send } from "lucide-react";
 import { useState } from "react";
 import { Button, Card, Field, Input, PageHeader, SectionHeading, Textarea } from "@/components/ui";
-import { useMessages, newId } from "@/context/SiteContext";
+import { useMessages, newId, useSite } from "@/context/SiteContext";
 
 export const Route = createFileRoute("/_site/contact")({
   component: ContactPage,
@@ -30,7 +30,7 @@ function ContactPage() {
   const { data } = useSite();
   const s = data.settings;
   const [messages, updateMessages] = useMessages();
-  const [form, setForm] = useState({ name: "", email: "", phone: "", subject: SUBJECTS[0], message: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "Ticket booking help", message: "" });
   const [sent, setSent] = useState(false);
 
   const submit = (e: React.FormEvent) => {
@@ -48,7 +48,7 @@ function ContactPage() {
       },
     ]);
     setSent(true);
-    setForm({ name: "", email: "", phone: "", subject: SUBJECTS[0], message: "" });
+    setForm({ name: "", email: "", phone: "", subject: "Ticket booking help", message: "" });
   };
 
   const set = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Pencil, Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
-import { ImageSelect, VENUE_IMAGES, EmptyRow } from "@/components/admin-bits";
+import { ImageSelect, EmptyRow } from "@/components/admin-bits";
 import { formatMatchDate } from "@/components/MatchCard";
 import { Badge, Button, Card, Field, Input, Modal, Select } from "@/components/ui";
 import { newId, useMatches } from "@/context/SiteContext";

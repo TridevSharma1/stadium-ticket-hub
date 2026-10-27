@@ -6,7 +6,7 @@ import { formatMatchDate } from "@/components/MatchCard";
 import { newId, useBookings, useSite } from "@/context/SiteContext";
 import type { SeatTier } from "@/lib/types";
 
-type BookSearch = { category: SeatTier["name"] | undefined };
+type BookSearch = { category?: SeatTier["name"] | undefined };
 
 export const Route = createFileRoute("/_site/book/$matchId")({
   validateSearch: (search: Record<string, unknown>): BookSearch => ({

@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Award,
   Building2,
-  Cricket,
+  Target,
   Flag,
   Medal,
   ParkingSquare,
@@ -127,7 +127,7 @@ function AboutPage() {
             <p className="mt-2 text-sm text-primary-foreground/80">Total stadium capacity</p>
           </Card>
           <Card className="p-8">
-            <Cricket className="h-8 w-8 text-secondary" />
+            <Target className="h-8 w-8 text-secondary" />
             <h3 className="mt-3 font-display text-2xl tracking-wide">Cricket</h3>
             <p className="mt-2 text-sm text-muted-foreground">
               {cricketCount} fixtures currently listed — internationals, IPL blockbusters and domestic
@@ -159,9 +159,12 @@ function AboutPage() {
             ))}
           </div>
           <div className="mt-10 text-center">
-            <Button size="lg" onClick={() => (window.location.href = "/matches")}>
+            <Link
+              to="/matches"
+              className="inline-flex h-13 items-center justify-center gap-2 rounded-full bg-primary px-9 text-base font-semibold text-primary-foreground shadow-premium transition-colors hover:bg-secondary"
+            >
               <Trophy className="h-5 w-5" /> Explore upcoming matches
-            </Button>
+            </Link>
           </div>
         </div>
       </section>

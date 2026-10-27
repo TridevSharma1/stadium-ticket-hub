@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Pencil, Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
-import { ImageSelect, EmptyRow } from "@/components/admin-bits";
+import { ImageSelect, VENUE_IMAGES, EmptyRow } from "@/components/admin-bits";
 import { Badge, Button, Card, Field, Input, Modal } from "@/components/ui";
 import { newId, useBanner } from "@/context/SiteContext";
 import type { Banner } from "@/lib/types";
