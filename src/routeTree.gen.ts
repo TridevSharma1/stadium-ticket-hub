@@ -11,6 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SiteRouteImport } from './routes/_site'
 import { Route as SiteIndexRouteImport } from './routes/_site.index'
+import { Route as SiteAboutRouteImport } from './routes/_site.about'
+import { Route as SiteContactRouteImport } from './routes/_site.contact'
+import { Route as SiteGalleryRouteImport } from './routes/_site.gallery'
 import { Route as SiteMatchesRouteImport } from './routes/_site.matches'
 import { Route as SiteSportsRouteImport } from './routes/_site.sports'
 import { Route as SiteTicketsRouteImport } from './routes/_site.tickets'
@@ -25,6 +28,21 @@ const SiteRoute = SiteRouteImport.update({
 const SiteIndexRoute = SiteIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteAboutRoute = SiteAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteContactRoute = SiteContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteGalleryRoute = SiteGalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
   getParentRoute: () => SiteRoute,
 } as any)
 const SiteMatchesRoute = SiteMatchesRouteImport.update({
@@ -60,6 +78,9 @@ const SiteMatchesIdRoute = SiteMatchesIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof SiteIndexRoute
+  '/about': typeof SiteAboutRoute
+  '/contact': typeof SiteContactRoute
+  '/gallery': typeof SiteGalleryRoute
   '/matches': typeof SiteMatchesRouteWithChildren
   '/sports': typeof SiteSportsRoute
   '/tickets': typeof SiteTicketsRoute
@@ -68,6 +89,9 @@ export interface FileRoutesByFullPath {
   '/matches/': typeof SiteMatchesIndexRoute
 }
 export interface FileRoutesByTo {
+  '/about': typeof SiteAboutRoute
+  '/contact': typeof SiteContactRoute
+  '/gallery': typeof SiteGalleryRoute
   '/sports': typeof SiteSportsRoute
   '/tickets': typeof SiteTicketsRoute
   '/': typeof SiteIndexRoute
@@ -78,6 +102,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_site': typeof SiteRouteWithChildren
+  '/_site/about': typeof SiteAboutRoute
+  '/_site/contact': typeof SiteContactRoute
+  '/_site/gallery': typeof SiteGalleryRoute
   '/_site/matches': typeof SiteMatchesRouteWithChildren
   '/_site/sports': typeof SiteSportsRoute
   '/_site/tickets': typeof SiteTicketsRoute
@@ -90,6 +117,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
+    | '/contact'
+    | '/gallery'
     | '/matches'
     | '/sports'
     | '/tickets'
@@ -98,6 +128,9 @@ export interface FileRouteTypes {
     | '/matches/'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/about'
+    | '/contact'
+    | '/gallery'
     | '/sports'
     | '/tickets'
     | '/'
@@ -107,6 +140,9 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_site'
+    | '/_site/about'
+    | '/_site/contact'
+    | '/_site/gallery'
     | '/_site/matches'
     | '/_site/sports'
     | '/_site/tickets'
@@ -134,6 +170,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof SiteIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/about': {
+      id: '/_site/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof SiteAboutRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/contact': {
+      id: '/_site/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof SiteContactRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/gallery': {
+      id: '/_site/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof SiteGalleryRouteImport
       parentRoute: typeof SiteRoute
     }
     '/_site/matches': {
@@ -196,6 +253,9 @@ const SiteMatchesRouteWithChildren = SiteMatchesRoute._addFileChildren(
 )
 
 interface SiteRouteChildren {
+  SiteAboutRoute: typeof SiteAboutRoute
+  SiteContactRoute: typeof SiteContactRoute
+  SiteGalleryRoute: typeof SiteGalleryRoute
   SiteMatchesRoute: typeof SiteMatchesRouteWithChildren
   SiteSportsRoute: typeof SiteSportsRoute
   SiteTicketsRoute: typeof SiteTicketsRoute
@@ -204,6 +264,9 @@ interface SiteRouteChildren {
 }
 
 const SiteRouteChildren: SiteRouteChildren = {
+  SiteAboutRoute: SiteAboutRoute,
+  SiteContactRoute: SiteContactRoute,
+  SiteGalleryRoute: SiteGalleryRoute,
   SiteMatchesRoute: SiteMatchesRouteWithChildren,
   SiteSportsRoute: SiteSportsRoute,
   SiteTicketsRoute: SiteTicketsRoute,
