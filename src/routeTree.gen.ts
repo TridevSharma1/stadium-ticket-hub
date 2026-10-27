@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SiteRouteImport } from './routes/_site'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as SiteIndexRouteImport } from './routes/_site.index'
 import { Route as SiteAboutRouteImport } from './routes/_site.about'
 import { Route as SiteContactRouteImport } from './routes/_site.contact'
@@ -17,12 +18,18 @@ import { Route as SiteGalleryRouteImport } from './routes/_site.gallery'
 import { Route as SiteMatchesRouteImport } from './routes/_site.matches'
 import { Route as SiteSportsRouteImport } from './routes/_site.sports'
 import { Route as SiteTicketsRouteImport } from './routes/_site.tickets'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as SiteBookMatchIdRouteImport } from './routes/_site.book.$matchId'
 import { Route as SiteMatchesIndexRouteImport } from './routes/_site.matches.index'
 import { Route as SiteMatchesIdRouteImport } from './routes/_site.matches.$id'
 
 const SiteRoute = SiteRouteImport.update({
   id: '/_site',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SiteIndexRoute = SiteIndexRouteImport.update({
@@ -60,6 +67,11 @@ const SiteTicketsRoute = SiteTicketsRouteImport.update({
   path: '/tickets',
   getParentRoute: () => SiteRoute,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const SiteBookMatchIdRoute = SiteBookMatchIdRouteImport.update({
   id: '/book/$matchId',
   path: '/book/$matchId',
@@ -78,12 +90,14 @@ const SiteMatchesIdRoute = SiteMatchesIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof SiteIndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/about': typeof SiteAboutRoute
   '/contact': typeof SiteContactRoute
   '/gallery': typeof SiteGalleryRoute
   '/matches': typeof SiteMatchesRouteWithChildren
   '/sports': typeof SiteSportsRoute
   '/tickets': typeof SiteTicketsRoute
+  '/admin/': typeof AdminIndexRoute
   '/book/$matchId': typeof SiteBookMatchIdRoute
   '/matches/$id': typeof SiteMatchesIdRoute
   '/matches/': typeof SiteMatchesIndexRoute
@@ -95,6 +109,7 @@ export interface FileRoutesByTo {
   '/sports': typeof SiteSportsRoute
   '/tickets': typeof SiteTicketsRoute
   '/': typeof SiteIndexRoute
+  '/admin': typeof AdminIndexRoute
   '/book/$matchId': typeof SiteBookMatchIdRoute
   '/matches/$id': typeof SiteMatchesIdRoute
   '/matches': typeof SiteMatchesIndexRoute
@@ -102,6 +117,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_site': typeof SiteRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
   '/_site/about': typeof SiteAboutRoute
   '/_site/contact': typeof SiteContactRoute
   '/_site/gallery': typeof SiteGalleryRoute
@@ -109,6 +125,7 @@ export interface FileRoutesById {
   '/_site/sports': typeof SiteSportsRoute
   '/_site/tickets': typeof SiteTicketsRoute
   '/_site/': typeof SiteIndexRoute
+  '/admin/': typeof AdminIndexRoute
   '/_site/book/$matchId': typeof SiteBookMatchIdRoute
   '/_site/matches/$id': typeof SiteMatchesIdRoute
   '/_site/matches/': typeof SiteMatchesIndexRoute
@@ -117,12 +134,14 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/about'
     | '/contact'
     | '/gallery'
     | '/matches'
     | '/sports'
     | '/tickets'
+    | '/admin/'
     | '/book/$matchId'
     | '/matches/$id'
     | '/matches/'
@@ -134,12 +153,14 @@ export interface FileRouteTypes {
     | '/sports'
     | '/tickets'
     | '/'
+    | '/admin'
     | '/book/$matchId'
     | '/matches/$id'
     | '/matches'
   id:
     | '__root__'
     | '/_site'
+    | '/admin'
     | '/_site/about'
     | '/_site/contact'
     | '/_site/gallery'
@@ -147,6 +168,7 @@ export interface FileRouteTypes {
     | '/_site/sports'
     | '/_site/tickets'
     | '/_site/'
+    | '/admin/'
     | '/_site/book/$matchId'
     | '/_site/matches/$id'
     | '/_site/matches/'
@@ -154,6 +176,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   SiteRoute: typeof SiteRouteWithChildren
+  AdminRoute: typeof AdminRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -163,6 +186,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof SiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_site/': {
@@ -213,6 +243,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/tickets'
       preLoaderRoute: typeof SiteTicketsRouteImport
       parentRoute: typeof SiteRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/_site/book/$matchId': {
       id: '/_site/book/$matchId'
@@ -276,8 +313,19 @@ const SiteRouteChildren: SiteRouteChildren = {
 
 const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)
 
+interface AdminRouteChildren {
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   SiteRoute: SiteRouteWithChildren,
+  AdminRoute: AdminRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
