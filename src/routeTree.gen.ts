@@ -19,6 +19,14 @@ import { Route as SiteMatchesRouteImport } from './routes/_site.matches'
 import { Route as SiteSportsRouteImport } from './routes/_site.sports'
 import { Route as SiteTicketsRouteImport } from './routes/_site.tickets'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminBannersRouteImport } from './routes/admin.banners'
+import { Route as AdminBookingsRouteImport } from './routes/admin.bookings'
+import { Route as AdminFaqsRouteImport } from './routes/admin.faqs'
+import { Route as AdminGalleryRouteImport } from './routes/admin.gallery'
+import { Route as AdminMatchesRouteImport } from './routes/admin.matches'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminTestimonialsRouteImport } from './routes/admin.testimonials'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as SiteBookMatchIdRouteImport } from './routes/_site.book.$matchId'
 import { Route as SiteMatchesIndexRouteImport } from './routes/_site.matches.index'
 import { Route as SiteMatchesIdRouteImport } from './routes/_site.matches.$id'
@@ -72,6 +80,46 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminBannersRoute = AdminBannersRouteImport.update({
+  id: '/banners',
+  path: '/banners',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminBookingsRoute = AdminBookingsRouteImport.update({
+  id: '/bookings',
+  path: '/bookings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminFaqsRoute = AdminFaqsRouteImport.update({
+  id: '/faqs',
+  path: '/faqs',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminGalleryRoute = AdminGalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMatchesRoute = AdminMatchesRouteImport.update({
+  id: '/matches',
+  path: '/matches',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminTestimonialsRoute = AdminTestimonialsRouteImport.update({
+  id: '/testimonials',
+  path: '/testimonials',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
 const SiteBookMatchIdRoute = SiteBookMatchIdRouteImport.update({
   id: '/book/$matchId',
   path: '/book/$matchId',
@@ -97,6 +145,14 @@ export interface FileRoutesByFullPath {
   '/matches': typeof SiteMatchesRouteWithChildren
   '/sports': typeof SiteSportsRoute
   '/tickets': typeof SiteTicketsRoute
+  '/admin/banners': typeof AdminBannersRoute
+  '/admin/bookings': typeof AdminBookingsRoute
+  '/admin/faqs': typeof AdminFaqsRoute
+  '/admin/gallery': typeof AdminGalleryRoute
+  '/admin/matches': typeof AdminMatchesRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/testimonials': typeof AdminTestimonialsRoute
+  '/admin/users': typeof AdminUsersRoute
   '/admin/': typeof AdminIndexRoute
   '/book/$matchId': typeof SiteBookMatchIdRoute
   '/matches/$id': typeof SiteMatchesIdRoute
@@ -108,6 +164,14 @@ export interface FileRoutesByTo {
   '/gallery': typeof SiteGalleryRoute
   '/sports': typeof SiteSportsRoute
   '/tickets': typeof SiteTicketsRoute
+  '/admin/banners': typeof AdminBannersRoute
+  '/admin/bookings': typeof AdminBookingsRoute
+  '/admin/faqs': typeof AdminFaqsRoute
+  '/admin/gallery': typeof AdminGalleryRoute
+  '/admin/matches': typeof AdminMatchesRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/testimonials': typeof AdminTestimonialsRoute
+  '/admin/users': typeof AdminUsersRoute
   '/': typeof SiteIndexRoute
   '/admin': typeof AdminIndexRoute
   '/book/$matchId': typeof SiteBookMatchIdRoute
@@ -124,6 +188,14 @@ export interface FileRoutesById {
   '/_site/matches': typeof SiteMatchesRouteWithChildren
   '/_site/sports': typeof SiteSportsRoute
   '/_site/tickets': typeof SiteTicketsRoute
+  '/admin/banners': typeof AdminBannersRoute
+  '/admin/bookings': typeof AdminBookingsRoute
+  '/admin/faqs': typeof AdminFaqsRoute
+  '/admin/gallery': typeof AdminGalleryRoute
+  '/admin/matches': typeof AdminMatchesRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/testimonials': typeof AdminTestimonialsRoute
+  '/admin/users': typeof AdminUsersRoute
   '/_site/': typeof SiteIndexRoute
   '/admin/': typeof AdminIndexRoute
   '/_site/book/$matchId': typeof SiteBookMatchIdRoute
@@ -141,6 +213,14 @@ export interface FileRouteTypes {
     | '/matches'
     | '/sports'
     | '/tickets'
+    | '/admin/banners'
+    | '/admin/bookings'
+    | '/admin/faqs'
+    | '/admin/gallery'
+    | '/admin/matches'
+    | '/admin/settings'
+    | '/admin/testimonials'
+    | '/admin/users'
     | '/admin/'
     | '/book/$matchId'
     | '/matches/$id'
@@ -152,6 +232,14 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/sports'
     | '/tickets'
+    | '/admin/banners'
+    | '/admin/bookings'
+    | '/admin/faqs'
+    | '/admin/gallery'
+    | '/admin/matches'
+    | '/admin/settings'
+    | '/admin/testimonials'
+    | '/admin/users'
     | '/'
     | '/admin'
     | '/book/$matchId'
@@ -167,6 +255,14 @@ export interface FileRouteTypes {
     | '/_site/matches'
     | '/_site/sports'
     | '/_site/tickets'
+    | '/admin/banners'
+    | '/admin/bookings'
+    | '/admin/faqs'
+    | '/admin/gallery'
+    | '/admin/matches'
+    | '/admin/settings'
+    | '/admin/testimonials'
+    | '/admin/users'
     | '/_site/'
     | '/admin/'
     | '/_site/book/$matchId'
@@ -251,6 +347,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/banners': {
+      id: '/admin/banners'
+      path: '/banners'
+      fullPath: '/admin/banners'
+      preLoaderRoute: typeof AdminBannersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/bookings': {
+      id: '/admin/bookings'
+      path: '/bookings'
+      fullPath: '/admin/bookings'
+      preLoaderRoute: typeof AdminBookingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/faqs': {
+      id: '/admin/faqs'
+      path: '/faqs'
+      fullPath: '/admin/faqs'
+      preLoaderRoute: typeof AdminFaqsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/gallery': {
+      id: '/admin/gallery'
+      path: '/gallery'
+      fullPath: '/admin/gallery'
+      preLoaderRoute: typeof AdminGalleryRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/matches': {
+      id: '/admin/matches'
+      path: '/matches'
+      fullPath: '/admin/matches'
+      preLoaderRoute: typeof AdminMatchesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/testimonials': {
+      id: '/admin/testimonials'
+      path: '/testimonials'
+      fullPath: '/admin/testimonials'
+      preLoaderRoute: typeof AdminTestimonialsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/_site/book/$matchId': {
       id: '/_site/book/$matchId'
       path: '/book/$matchId'
@@ -314,10 +466,26 @@ const SiteRouteChildren: SiteRouteChildren = {
 const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)
 
 interface AdminRouteChildren {
+  AdminBannersRoute: typeof AdminBannersRoute
+  AdminBookingsRoute: typeof AdminBookingsRoute
+  AdminFaqsRoute: typeof AdminFaqsRoute
+  AdminGalleryRoute: typeof AdminGalleryRoute
+  AdminMatchesRoute: typeof AdminMatchesRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminTestimonialsRoute: typeof AdminTestimonialsRoute
+  AdminUsersRoute: typeof AdminUsersRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminBannersRoute: AdminBannersRoute,
+  AdminBookingsRoute: AdminBookingsRoute,
+  AdminFaqsRoute: AdminFaqsRoute,
+  AdminGalleryRoute: AdminGalleryRoute,
+  AdminMatchesRoute: AdminMatchesRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminTestimonialsRoute: AdminTestimonialsRoute,
+  AdminUsersRoute: AdminUsersRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
