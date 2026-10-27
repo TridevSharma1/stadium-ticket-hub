@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Pencil, Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
-import { ImageSelect, VENUE_IMAGES, EmptyRow } from "@/components/admin-bits";
+import { DEFAULT_IMAGE, ImageSelect, VENUE_IMAGES, EmptyRow } from "@/components/admin-bits";
 import { Badge, Button, Card, Field, Input, Modal } from "@/components/ui";
 import { newId, useBanner } from "@/context/SiteContext";
 import type { Banner } from "@/lib/types";
@@ -47,7 +47,7 @@ function AdminBanners() {
               title: "",
               subtitle: "",
               buttonText: "Book Tickets",
-              image: VENUE_IMAGES[0],
+              image: DEFAULT_IMAGE,
               active: banners.length === 0,
             });
             setIsNew(true);

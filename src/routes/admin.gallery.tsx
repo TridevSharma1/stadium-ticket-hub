@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Pencil, Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
-import { ImageSelect, VENUE_IMAGES, EmptyRow } from "@/components/admin-bits";
+import { DEFAULT_IMAGE, ImageSelect, VENUE_IMAGES, EmptyRow } from "@/components/admin-bits";
 import { Button, Card, Field, Input, Modal } from "@/components/ui";
 import { newId, useGallery } from "@/context/SiteContext";
 import type { GalleryImage } from "@/lib/types";
