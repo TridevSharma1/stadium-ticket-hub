@@ -11,7 +11,7 @@ import {
   UtensilsCrossed,
   Wifi,
 } from "lucide-react";
-import { Button, Card, PageHeader, SectionHeading } from "@/components/ui";
+import { Card, PageHeader, SectionHeading } from "@/components/ui";
 import { useSite } from "@/context/SiteContext";
 
 export const Route = createFileRoute("/_site/about")({
