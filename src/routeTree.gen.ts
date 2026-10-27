@@ -9,50 +9,212 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as SiteRouteImport } from './routes/_site'
+import { Route as SiteIndexRouteImport } from './routes/_site.index'
+import { Route as SiteMatchesRouteImport } from './routes/_site.matches'
+import { Route as SiteSportsRouteImport } from './routes/_site.sports'
+import { Route as SiteTicketsRouteImport } from './routes/_site.tickets'
+import { Route as SiteBookMatchIdRouteImport } from './routes/_site.book.$matchId'
+import { Route as SiteMatchesIndexRouteImport } from './routes/_site.matches.index'
+import { Route as SiteMatchesIdRouteImport } from './routes/_site.matches.$id'
 
-const IndexRoute = IndexRouteImport.update({
+const SiteRoute = SiteRouteImport.update({
+  id: '/_site',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SiteIndexRoute = SiteIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteMatchesRoute = SiteMatchesRouteImport.update({
+  id: '/matches',
+  path: '/matches',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteSportsRoute = SiteSportsRouteImport.update({
+  id: '/sports',
+  path: '/sports',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteTicketsRoute = SiteTicketsRouteImport.update({
+  id: '/tickets',
+  path: '/tickets',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteBookMatchIdRoute = SiteBookMatchIdRouteImport.update({
+  id: '/book/$matchId',
+  path: '/book/$matchId',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteMatchesIndexRoute = SiteMatchesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SiteMatchesRoute,
+} as any)
+const SiteMatchesIdRoute = SiteMatchesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => SiteMatchesRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof SiteIndexRoute
+  '/matches': typeof SiteMatchesRouteWithChildren
+  '/sports': typeof SiteSportsRoute
+  '/tickets': typeof SiteTicketsRoute
+  '/book/$matchId': typeof SiteBookMatchIdRoute
+  '/matches/$id': typeof SiteMatchesIdRoute
+  '/matches/': typeof SiteMatchesIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/sports': typeof SiteSportsRoute
+  '/tickets': typeof SiteTicketsRoute
+  '/': typeof SiteIndexRoute
+  '/book/$matchId': typeof SiteBookMatchIdRoute
+  '/matches/$id': typeof SiteMatchesIdRoute
+  '/matches': typeof SiteMatchesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_site': typeof SiteRouteWithChildren
+  '/_site/matches': typeof SiteMatchesRouteWithChildren
+  '/_site/sports': typeof SiteSportsRoute
+  '/_site/tickets': typeof SiteTicketsRoute
+  '/_site/': typeof SiteIndexRoute
+  '/_site/book/$matchId': typeof SiteBookMatchIdRoute
+  '/_site/matches/$id': typeof SiteMatchesIdRoute
+  '/_site/matches/': typeof SiteMatchesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/matches'
+    | '/sports'
+    | '/tickets'
+    | '/book/$matchId'
+    | '/matches/$id'
+    | '/matches/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/sports'
+    | '/tickets'
+    | '/'
+    | '/book/$matchId'
+    | '/matches/$id'
+    | '/matches'
+  id:
+    | '__root__'
+    | '/_site'
+    | '/_site/matches'
+    | '/_site/sports'
+    | '/_site/tickets'
+    | '/_site/'
+    | '/_site/book/$matchId'
+    | '/_site/matches/$id'
+    | '/_site/matches/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  SiteRoute: typeof SiteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_site': {
+      id: '/_site'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof SiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_site/': {
+      id: '/_site/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof SiteIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/matches': {
+      id: '/_site/matches'
+      path: '/matches'
+      fullPath: '/matches'
+      preLoaderRoute: typeof SiteMatchesRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/sports': {
+      id: '/_site/sports'
+      path: '/sports'
+      fullPath: '/sports'
+      preLoaderRoute: typeof SiteSportsRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/tickets': {
+      id: '/_site/tickets'
+      path: '/tickets'
+      fullPath: '/tickets'
+      preLoaderRoute: typeof SiteTicketsRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/book/$matchId': {
+      id: '/_site/book/$matchId'
+      path: '/book/$matchId'
+      fullPath: '/book/$matchId'
+      preLoaderRoute: typeof SiteBookMatchIdRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/_site/matches/': {
+      id: '/_site/matches/'
+      path: '/'
+      fullPath: '/matches/'
+      preLoaderRoute: typeof SiteMatchesIndexRouteImport
+      parentRoute: typeof SiteMatchesRoute
+    }
+    '/_site/matches/$id': {
+      id: '/_site/matches/$id'
+      path: '/$id'
+      fullPath: '/matches/$id'
+      preLoaderRoute: typeof SiteMatchesIdRouteImport
+      parentRoute: typeof SiteMatchesRoute
     }
   }
 }
 
+interface SiteMatchesRouteChildren {
+  SiteMatchesIdRoute: typeof SiteMatchesIdRoute
+  SiteMatchesIndexRoute: typeof SiteMatchesIndexRoute
+}
+
+const SiteMatchesRouteChildren: SiteMatchesRouteChildren = {
+  SiteMatchesIdRoute: SiteMatchesIdRoute,
+  SiteMatchesIndexRoute: SiteMatchesIndexRoute,
+}
+
+const SiteMatchesRouteWithChildren = SiteMatchesRoute._addFileChildren(
+  SiteMatchesRouteChildren,
+)
+
+interface SiteRouteChildren {
+  SiteMatchesRoute: typeof SiteMatchesRouteWithChildren
+  SiteSportsRoute: typeof SiteSportsRoute
+  SiteTicketsRoute: typeof SiteTicketsRoute
+  SiteIndexRoute: typeof SiteIndexRoute
+  SiteBookMatchIdRoute: typeof SiteBookMatchIdRoute
+}
+
+const SiteRouteChildren: SiteRouteChildren = {
+  SiteMatchesRoute: SiteMatchesRouteWithChildren,
+  SiteSportsRoute: SiteSportsRoute,
+  SiteTicketsRoute: SiteTicketsRoute,
+  SiteIndexRoute: SiteIndexRoute,
+  SiteBookMatchIdRoute: SiteBookMatchIdRoute,
+}
+
+const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  SiteRoute: SiteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
