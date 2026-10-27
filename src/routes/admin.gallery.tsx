@@ -35,7 +35,7 @@ function AdminGallery() {
         </div>
         <Button
           onClick={() => {
-            setDraft({ id: newId("g"), title: "", image: VENUE_IMAGES[0] });
+            setDraft({ id: newId("g"), title: "", image: DEFAULT_IMAGE });
             setIsNew(true);
           }}
         >
