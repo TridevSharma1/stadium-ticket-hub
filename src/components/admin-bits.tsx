@@ -2,6 +2,7 @@ import type { ComponentType } from "react";
 import { Card } from "@/components/ui";
 
 /** Known venue photos admins can pick from; custom URLs also supported. */
+export const DEFAULT_IMAGE = "/images/hero-stadium.jpg";
 export const VENUE_IMAGES = [
   "/images/hero-stadium.jpg",
   "/images/match-cricket.jpg",
